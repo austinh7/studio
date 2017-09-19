@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Studio Layouts</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/layouts.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="studio">
+                <div class="section section--canvas-wrapper">
+                    <div class="section--canvas">
+
+                    </div>
+                </div>
+            </div>
+            <div class="config">
+                <h4 class="config--title">Config</h4>
+                <div class="config--container">
+                    <h5>Ratios</h5>
+                    <ul class="config--list config--list-sizes">
+                        <li class="config--list-size current" data-size="297x210">Golden ratio (landscape)</li>
+                        <li class="config--list-size" data-size="100x100">Square</li>
+                        <li class="config--list-size" data-size="210x297">Golden ratio (portrait)</li>
+                    </ul>
+                    <h5>Designs</h5>
+                    <ul class="config--list config--list-designs">
+
+                    </ul>
+
+                    <h5>Layouts</h5>
+                    <ul class="config--list config--list-layouts">
+
+                    </ul>
+
+                    <h5>Outer padding</h5>
+                    <input class="filter-slider outer-padding-lr" type="range" min="0" max="200" value="10" data-default="10"><br/>
+                    <input class="filter-slider outer-padding-tb" type="range" min="0" max="200" value="10" data-default="10">
+
+                    <h5>Inner padding</h5>
+                    <input class="filter-slider inner-padding" type="range" min="0" max="50" value="10" data-default="10">
+                </div>
+            </div>
+        </div>
+
+        <script src="/studio/js/jquery-3.1.1.min.js"></script>
+        <script src="/studio/js/jquery-ui.min.js"></script>
+        <script src="/studio/js/layouts.js"></script>
+    </body>
+</html>

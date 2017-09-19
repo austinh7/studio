@@ -1,0 +1,82 @@
+.wrapper {
+	display: flex;
+
+	.studio {
+		flex-grow: 1;
+		height: 100vh;
+		
+		.section {
+			border: 1px solid red;
+
+			&.section--canvas-wrapper {
+				box-sizing: border-box;
+				padding: 20px;
+				width: 100%;
+				height: 100%;
+
+				.section--canvas {
+                    position: relative;
+					padding: 10px;
+					grid-gap: 10px;
+					box-sizing: border-box;
+					display: grid;
+					transition: all ease 0.5s;
+					border: 4px dashed #ccc;
+					margin-left: auto;
+					margin-right: auto;
+                    overflow: hidden;
+					
+					.box-image {
+						border: 1px solid #ccc;
+					}
+
+                    .design-bg,
+                    .design-decs {
+                        position: absolute;
+                        z-index: -1;
+
+                        .design--inner {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+
+                            .design--item {
+                                position: absolute;
+                                border: 1px solid #ccc;
+                            }
+                        }
+                    }
+
+                    .design--decs {
+                        z-index: 1;
+                    }
+				}
+			}
+		}
+	}
+
+	.config {
+		padding: 20px;
+		.config--container {
+			display: none;
+
+            h5 {
+                margin-bottom: 12px;
+            }
+
+			&.show {
+				display: block;
+			}
+
+			.config--list {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+
+				.current {
+					color: red;
+				}
+			}
+		}
+	}
+}

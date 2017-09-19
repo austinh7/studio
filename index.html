@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Studio</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div class="section section--header">
+            <dov class="container">
+                Header (fixed height)
+            </dov>
+        </div>
+        <div class="wrapper">
+            <div class="studio">
+                <div class="section section--canvas-wrapper">
+                    <div class="section--canvas">
+                        Canvas
+                    </div>
+                </div>
+                <div class="section section--footer">
+                    <div class="container">
+                        <h4 class="tools--title">Tools</h4>
+                        <div class="tools--container">
+                            Tools go in here
+                            <div>Photos</div>
+                            <div>Layouts</div>
+                            <div>Themes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="config">
+                <h4 class="config--title">Config</h4>
+                <div class="config--container">
+                    <h5>Sizes</h5>
+                    <ul class="config--list config--list-sizes">
+                        <li class="config--list-size current" data-size="400x300">400x300</li>
+                        <li class="config--list-size" data-size="300x400">300x400</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script src="/studio/js/jquery-3.1.1.min.js"></script>
+        <script src="/studio/js/jquery-ui.min.js"></script>
+        <script src="/studio/js/studio.js"></script>
+    </body>
+</html>

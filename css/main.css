@@ -1,0 +1,41 @@
+.section--header {
+  height: 136px; }
+
+.wrapper {
+  display: flex; }
+  .wrapper .studio {
+    flex-grow: 1;
+    height: calc(100vh - 136px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .wrapper .studio .section {
+      border: 1px solid red; }
+      .wrapper .studio .section.section--canvas-wrapper {
+        flex-grow: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column; }
+        .wrapper .studio .section.section--canvas-wrapper .section--canvas {
+          transition: all ease 0.5s;
+          border: 4px dashed #ccc;
+          margin-left: auto;
+          margin-right: auto; }
+      .wrapper .studio .section.section--footer .tools--container {
+        display: none; }
+        .wrapper .studio .section.section--footer .tools--container.show {
+          display: block; }
+  .wrapper .config {
+    padding: 20px; }
+    .wrapper .config .config--container {
+      display: none; }
+      .wrapper .config .config--container.show {
+        display: block; }
+      .wrapper .config .config--container .config--list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none; }
+        .wrapper .config .config--container .config--list .current {
+          color: red; }
+
+/*# sourceMappingURL=main.css.map */

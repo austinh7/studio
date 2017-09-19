@@ -1,0 +1,56 @@
+.wrapper {
+  display: flex; }
+  .wrapper .studio {
+    flex-grow: 1;
+    height: 100vh; }
+    .wrapper .studio .section {
+      border: 1px solid red; }
+      .wrapper .studio .section.section--canvas-wrapper {
+        box-sizing: border-box;
+        padding: 20px;
+        width: 100%;
+        height: 100%; }
+        .wrapper .studio .section.section--canvas-wrapper .section--canvas {
+          position: relative;
+          padding: 10px;
+          grid-gap: 10px;
+          box-sizing: border-box;
+          display: grid;
+          transition: all ease 0.5s;
+          border: 4px dashed #ccc;
+          margin-left: auto;
+          margin-right: auto;
+          overflow: hidden; }
+          .wrapper .studio .section.section--canvas-wrapper .section--canvas .box-image {
+            border: 1px solid #ccc; }
+          .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-bg,
+          .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decs {
+            position: absolute;
+            z-index: -1; }
+            .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-bg .design--inner,
+            .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decs .design--inner {
+              width: 100%;
+              height: 100%;
+              position: relative; }
+              .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-bg .design--inner .design--item,
+              .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decs .design--inner .design--item {
+                position: absolute;
+                border: 1px solid #ccc; }
+          .wrapper .studio .section.section--canvas-wrapper .section--canvas .design--decs {
+            z-index: 1; }
+  .wrapper .config {
+    padding: 20px; }
+    .wrapper .config .config--container {
+      display: none; }
+      .wrapper .config .config--container h5 {
+        margin-bottom: 12px; }
+      .wrapper .config .config--container.show {
+        display: block; }
+      .wrapper .config .config--container .config--list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none; }
+        .wrapper .config .config--container .config--list .current {
+          color: red; }
+
+/*# sourceMappingURL=layouts.css.map */
