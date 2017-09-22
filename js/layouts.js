@@ -45,6 +45,14 @@ $(document).ready(function(){
 		$(".config--list-size").removeClass("current");
 		$(this).addClass("current");
 		resizeCanvas(getSize()[0],getSize()[1]);
+
+		// Once the canvas resize has happened need to resize design backgrounds, as we are using animations needs to wait for animation to complete.
+		$(".section--canvas").one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+
+			console.log($(".section--canvas").css("padding"));
+
+			$(".design-background, .design-decorations").css({"width": $(".section--canvas").width() + 20, "height": $(".section--canvas").height() + 20});
+		});
 	});
 
 	$(".config--list-design").click(function(){
@@ -56,19 +64,40 @@ $(document).ready(function(){
 		$(".config--list-design").removeClass("current");
 		$(this).addClass("current");
 
+		// each page needs to be looped through and built.
+
 		// Remove old html
-		$(".section--canvas").html("");
+		$(".section--canvas-wrapper").html("");
 
+		$(creation[0]['components']).each(function(){
+
+			// Build design, should this be function?
+			// Would need creation passing in
+
+			// add container for component
+
+			$(".section--canvas-wrapper").append("<div class='section--canvas section--canvas-"+$(this)[0]['idx']+"'></div>");
+			resizeCanvas(getSize()[0],getSize()[1]);
+
+			// apply the background
+			// needs to be by component not creation
+			// console.log($(this)[0]['layers']);
+
+			// need the layers
+
+			applyLayers($(this)[0]['layers'], $(this)[0]['idx'], 'background');
+
+			// build the layout
+			buildLayout($(this)[0]['lid']);
+
+			// apply the decorations
+			// needs to be by component not creation
+			applyLayers($(this)[0]['layers'], $(this)[0]['idx'], 'decorations');
+
+			// console.log("layout -> " + $(this)['lid']);
+		});
 		
-		// apply the background
-		applyBG(creation);
-
-		// build the layout
-		buildLayout(creation[0]['components'][0]['lid']);
-
-		// apply the decorations
-		applyDecs(creation);
-
+		// buildLayout(creation[0]['components'][0]['lid']);
 	});
 
 	$(".config--list-layout").click(function(){
@@ -109,20 +138,20 @@ function toPerCent(value){
 	return out;
 }
 
-function applyDecs(creation){
+function applyLayers(creation, idx, type){
 
-	var gridSize = $(".section--canvas").attr("style");
+	var section = ".section--canvas-" + idx,
+		gridSize = $(".section--canvas").attr("style");
 
-	$(".section--canvas").append("<div class='design-decs' style='"+gridSize+"'><div class='design--inner'></div></div>");
+	$(section).append("<div class='design-" + type + "' style='"+gridSize+"'><div class='design--inner'></div></div>");
 
-	var decorations = getObjects(creation[0]['components'][0]['layers'], 'role', 'decorations');
+	var elements = getObjects(creation, 'role', type);
 
-	if(decorations.length > 0){
-		$(decorations[0]['elements']).each(function(){
+	if(elements.length > 0){
+		$(elements[0]['elements']).each(function(){
 
 			var bg = $(this),
 				bgz = bg[0]['z'],
-				// sizes & positions need to be converted to %.
 				bgx = toPerCent(bg[0]['x']),
 				bgy = toPerCent(bg[0]['y']),
 				bgw = toPerCent(bg[0]['w']),
@@ -131,55 +160,16 @@ function applyDecs(creation){
 				bgsrc = bg[0]['src'],
 				bgstyles = 'z-index: ' + bgz + '; left: ' + bgx + '; top: ' + bgy + '; width: ' + bgw + '; height: ' + bgh + ';';
 
-				if (bgsrc ==''){
+			if (bgsrc ==''){
 
-				} else if (bgsrc.match("^#")) {
-					bgstyles += ' background-color: ' + bgsrc + '; ';
-				} else {
-					bgstyles += 'background-image: url(' + bgsrc + '); ';
-				}
+			} else if (bgsrc.match("^#")) {
+				bgstyles += ' background-color: ' + bgsrc + '; ';
+			} else {
+				bgstyles += 'background-image: url(' + bgsrc + '); ';
+			}
 
-				$(".design-decs .design--inner").append("<div class='design--item' style='" + bgstyles + "'></div>");
+			$(section + " .design-" + type + " .design--inner").append("<div class='design--item' style='" + bgstyles + "'></div>");
 
-		});
-	}
-
-}
-
-function applyBG(creation){
-	// replicate the width / height of the container
-	var gridSize = $(".section--canvas").attr("style");
-
-	$(".section--canvas").append("<div class='design-bg' style='"+gridSize+"'><div class='design--inner'></div></div>");
-	
-	var backgrounds = getObjects(creation[0]['components'][0]['layers'], 'role', 'background');
-
-	// check to see if there is background layer
-	if(backgrounds.length > 0){
-		// each element
-		$(backgrounds[0]['elements']).each(function(){
-			// get position & sizes
-			var bg = $(this),
-				bgz = bg[0]['z'],
-				// sizes & positions need to be converted to %.
-				bgx = toPerCent(bg[0]['x']),
-				bgy = toPerCent(bg[0]['y']),
-				bgw = toPerCent(bg[0]['w']),
-				bgh = toPerCent(bg[0]['h']),
-				bgr = bg[0]['r'],
-				bgsrc = bg[0]['src'],
-				bgstyles = 'z-index: ' + bgz + '; left: ' + bgx + '; top: ' + bgy + '; width: ' + bgw + '; height: ' + bgh + ';';
-
-				if (bgsrc ==''){
-
-				} else if (bgsrc.match("^#")) {
-					bgstyles += ' background-color: ' + bgsrc + '; ';
-				} else {
-					bgstyles += 'background-image: url(' + bgsrc + '); ';
-				}
-
-			$(".design-bg .design--inner").append("<div class='design--item' style='" + bgstyles + "'></div>");
-			
 		});
 	}
 }
@@ -193,12 +183,12 @@ function buildLayout(creation){
 
 	// console.log(creation[0]['components'][0]['lid']);
 
-	console.log(jsonL);
+	// console.log(jsonL);
 
 	// find the correct layoutId
 	var layout = getObjects(jsonL['layouts'], 'id', creation);
 
-	console.log(layout[0]['width']);
+	// console.log(layout[0]['width']);
 
 	// Add html
 
@@ -243,7 +233,7 @@ function buildLayout(creation){
 			gc = x + ' / ' + xw,
 			gr = y + ' / ' + yh;
 
-			console.log("gc " + gc + ", gr" + gr);
+			// console.log("gc " + gc + ", gr" + gr);
 
 		// gc = $(this)[0]['x'] + ' / ' + parseInt($(this)[0]['x']) + parseInt($(this)[0]['w']);
 		

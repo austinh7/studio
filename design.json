@@ -8,6 +8,33 @@
 			"components": [
 				{
 					"idx": "1",
+					"type": "coverPage",
+					"w": "",
+					"h": "",
+					"componentID": "",
+					"lid": "l1",
+					"layers": [
+						{
+							"z": "-1",
+							"role": "background",
+							"elements": [
+								{
+									"type": "background",
+									"id": "1",
+									"z": 1,
+									"src": "#000000",
+									"x": 0,
+									"y": 0,
+									"w": 1,
+									"h": 1,
+									"r": 0
+								}
+							]
+						}
+					]
+				},
+				{
+					"idx": "2",
 					"type": "InnerPage",
 					"w": "",
 					"h": "",
