@@ -27,7 +27,11 @@
                     overflow: hidden;
 					
 					.box-image {
-						border: 1px solid #ccc;
+						border: 1px dotted #000;
+                        overflow: hidden;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
 					}
 
                     .design-background,
@@ -43,11 +47,12 @@
                             .design--item {
                                 position: absolute;
                                 border: 1px solid #ccc;
+                                background-size: contain;
                             }
                         }
                     }
 
-                    .design--decs {
+                    .design-decorations {
                         z-index: 1;
                     }
 				}

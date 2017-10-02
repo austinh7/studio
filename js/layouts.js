@@ -76,7 +76,7 @@ $(document).ready(function(){
 
 			// add container for component
 
-			$(".section--canvas-wrapper").append("<div class='section--canvas section--canvas-"+$(this)[0]['idx']+"'></div>");
+			$(".section--canvas-wrapper").append("<div class='section--canvas section--canvas-"+$(this)[0]['idx']+"' data-type='"+$(this)[0]['type']+"'></div>");
 			resizeCanvas(getSize()[0],getSize()[1]);
 
 			// apply the background
@@ -88,7 +88,7 @@ $(document).ready(function(){
 			applyLayers($(this)[0]['layers'], $(this)[0]['idx'], 'background');
 
 			// build the layout
-			buildLayout($(this)[0]['lid']);
+			buildLayout($(this)[0]['lid'], $(this)[0]['idx']);
 
 			// apply the decorations
 			// needs to be by component not creation
@@ -100,6 +100,12 @@ $(document).ready(function(){
 		// buildLayout(creation[0]['components'][0]['lid']);
 	});
 
+	// $(".section--canvas-wrapper").click(function(){
+	// 	console.log("click?");
+	// 	console.log($(this));
+	// 	// console.log($(this).closest('.studio--canvas'));
+	// });
+
 	$(".config--list-layout").click(function(){
 		$(".config--list-layout").removeClass("current");
 		$(this).addClass("current");
@@ -110,6 +116,7 @@ $(document).ready(function(){
 		var layoutId = ($(this).attr("data-layout-id"));
 
 		// add in new layout
+		// need the idx????
 		buildLayout(layoutId);
 	});
 
@@ -174,7 +181,7 @@ function applyLayers(creation, idx, type){
 	}
 }
 
-function buildLayout(creation){
+function buildLayout(creation, idx){
 
 	// Should loop through components and fire for each, (page)
 	// then go through each layer and then each element
@@ -228,16 +235,32 @@ function buildLayout(creation){
 			y = $(this)[0]['y'],
 			w = $(this)[0]['w'],
 			h = $(this)[0]['h'],
+			src = $(this)[0]['src'],
 			xw = x + w,
 			yh = y + h,
 			gc = x + ' / ' + xw,
-			gr = y + ' / ' + yh;
+			gr = y + ' / ' + yh,
+			img = '';
+
+		if (src){
+			img = "background-image: url("+src+");";
+		}
 
 			// console.log("gc " + gc + ", gr" + gr);
 
 		// gc = $(this)[0]['x'] + ' / ' + parseInt($(this)[0]['x']) + parseInt($(this)[0]['w']);
-		
-		$(".section--canvas").append("<div class='box box-image box-image-" + $(this)[0]['id'] + "' style='grid-column: " + gc + "; grid-row: " + gr + "'>id -> " + $(this)[0]['id'] + " type -> " + $(this)[0]['type'] + "</div>");
+
+
+
+		// needs the id for the section canvas to prevent repeats
+		var section = '';
+		if(idx){
+			section = '.section--canvas-' + idx;
+		} else {
+			section = '.section--canvas';
+		}
+
+		$(section).append("<div class='box box-image box-image-" + $(this)[0]['id'] + "' style='grid-column: " + gc + "; grid-row: " + gr + "; "+img+"'></div>");
 	});
 }
 

@@ -22,7 +22,11 @@
           margin-right: auto;
           overflow: hidden; }
           .wrapper .studio .section.section--canvas-wrapper .section--canvas .box-image {
-            border: 1px solid #ccc; }
+            border: 1px dotted #000;
+            overflow: hidden;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%; }
           .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-background,
           .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decorations {
             position: absolute;
@@ -35,8 +39,9 @@
               .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-background .design--inner .design--item,
               .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decorations .design--inner .design--item {
                 position: absolute;
-                border: 1px solid #ccc; }
-          .wrapper .studio .section.section--canvas-wrapper .section--canvas .design--decs {
+                border: 1px solid #ccc;
+                background-size: contain; }
+          .wrapper .studio .section.section--canvas-wrapper .section--canvas .design-decorations {
             z-index: 1; }
   .wrapper .config {
     padding: 20px; }
